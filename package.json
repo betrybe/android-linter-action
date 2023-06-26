@@ -1,0 +1,20 @@
+{
+  "name": "detekt-linter-action",
+  "version": "1.0.0",
+  "description": "GitHub Action for running detekt-linter",
+  "main": "index.js",
+  "scripts": {
+    "pack": "ncc build index.js -o dist",
+    "test": "jest"
+  },
+  "author": "Trybe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/betrybe/detekt-linter-action/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betrybe/detekt-linter-action.git"
+  },
+  "homepage": "https://github.com/betrybe/detekt-linter-action#readme"
+}
