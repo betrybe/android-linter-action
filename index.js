@@ -2,6 +2,7 @@
 
 
 const run = async () => {
+  return true
 
   // Carrega dados da variavel de ambiente
   // Captura token para escrever no github
@@ -12,3 +13,5 @@ const run = async () => {
   // FASE 1
   // executar testes e pegar o output
 }
+
+run()
