@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pack": "ncc build index.js -o dist",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --fix ."
   },
   "author": "Trybe",
   "license": "ISC",
@@ -16,5 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/betrybe/detekt-linter-action.git"
   },
-  "homepage": "https://github.com/betrybe/detekt-linter-action#readme"
+  "homepage": "https://github.com/betrybe/detekt-linter-action#readme",
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "jest": "^27.5.1"
+  }
 }
