@@ -18,6 +18,11 @@
     "url": "git+https://github.com/betrybe/detekt-linter-action.git"
   },
   "homepage": "https://github.com/betrybe/detekt-linter-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "dotenv": "^16.0.0",
+    "xml2js": "^0.4.23"
+  },
   "devDependencies": {
     "eslint": "^8.14.0",
     "jest": "^27.5.1"
