@@ -1,4 +1,4 @@
-const { buildCheckstyleObject, getCheckstylesFiles, getDetektReport } = require('../controller/detektManager');
+const { buildCheckstyleObject, getCheckstylesFiles } = require('../controller/detektManager');
 const { loadFile, searchFilesXml } = require('../controller/fileManager');
 
 jest.mock('../controller/fileManager');
