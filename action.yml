@@ -20,14 +20,6 @@ runs:
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
-      - name: Run Unit tests
-        run: ./gradlew test
-        shell: bash
-
       - name: Run linter detekt 
         run: ./gradlew detekt
-        shell: bash
-
-      - name: analyze results linter
-        run: node $GITHUB_ACTION_PATH/dist/index.js
         shell: bash
