@@ -1,12 +1,5 @@
 name: "Linter Evaluator"
 description: "Evaluate linter for Tryber projects in android and ios"
-inputs:
-  linter-output:
-    description: "Linter output"
-    required: true
-  pr-number:
-    description: "Pull request number"
-    required: true 
 outputs:
   result:
     description: "Linter evaluation"
@@ -34,5 +27,3 @@ runs:
       - name: analyze results
         run: node $GITHUB_ACTION_PATH/dist/index.js
         shell: bash
-        env:
-          INPUT_PR_AUTHOR_USERNAME: ${{inputs.pr_author_username}}
