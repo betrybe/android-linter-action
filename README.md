@@ -5,7 +5,7 @@ A Github action that evaluates projects with [detekt](https://detekt.dev/)  and 
 
 ## Development
 
-🚧  👷‍♀️ Em construção  🚧  
+### Tools
 
 ### Build
 
