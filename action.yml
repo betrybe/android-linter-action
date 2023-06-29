@@ -21,7 +21,7 @@ runs:
       uses: gradle/gradle-build-action@v2
 
     - name: Run build 
-      run: ./gradlew build
+      run: ./gradlew detekt --report xml:detekt-report.xml
       shell: bash
 
     - name: Run linter detekt

@@ -27,4 +27,12 @@ ncc build index.js --out dist/index.js
 
 ## Usage
 
+No projeto android adicionar ao build.grade o seguinte trecho
+
+```kotlin
+task detekt(type: Exec) {
+    commandLine "bash", "-c", "./gradlew detekt -i > detekt-report.txt"
+}
+```
+
 🚧  👷‍♀️ Em construção  🚧  
