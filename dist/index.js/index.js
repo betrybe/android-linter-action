@@ -9296,7 +9296,7 @@ function getDetektReport() {
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(detektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
-  return detektReport
+  return JSON.stringify(detektReport)
 }
 
 
