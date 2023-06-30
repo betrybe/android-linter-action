@@ -9621,12 +9621,10 @@ const run = () => {
 
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
-      console.error(`Erro no comando bash: ${data}`)
     })
 
     childProcess.on('close', (code) => {
-      core.info(`\u001b[38;5;6m[erro] O comando encerrado com o código de saída: ${code}`)
-      console.log(`O comando bash foi encerrado com o código de saída: ${code}`)
+      core.info('\u001b[38;5;6m[info] Iniciando analise do detekt')
 
       report = getDetektReport()
       core.setOutput('result > detekt', report)
