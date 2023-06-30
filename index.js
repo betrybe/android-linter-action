@@ -24,7 +24,7 @@ const run = () => {
       report = getDetektReport()
       core.setOutput('result > detekt', report)
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
-      return outputBase64
+      return report
     })
     
     // exec(command, (error, stdout, stderr) => {
