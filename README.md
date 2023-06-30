@@ -33,6 +33,12 @@ No projeto android adicionar ao build.grade o seguinte trecho
 task detekt(type: Exec) {
     commandLine "bash", "-c", "./gradlew detekt -i > detekt-report.txt"
 }
+
+sudo ./gradlew detekt --continue
+
+sudo ./gradlew detekt --continue -r 'xml:reports/detekt.xml'
 ```
+
+ sudo ./gradlew --i --report xml:reports/detekt.xml 
 
 🚧  👷‍♀️ Em construção  🚧  
