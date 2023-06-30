@@ -6,7 +6,7 @@ const { parserXmlToObject } = require('../controller/xmlParser')
  * @return {string}
  */
 function getDetektReport() {
-  console.log('iniciando aqui') 
+
   const detektReportPath = 'app/build/reports/detekt'
   const files = getCheckstylesFiles([detektReportPath])
  

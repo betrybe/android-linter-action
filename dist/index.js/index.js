@@ -9289,7 +9289,6 @@ const { parserXmlToObject } = __nccwpck_require__(5984)
  * @return {string}
  */
 function getDetektReport() {
-  console.log('iniciando aqui') 
   const detektReportPath = 'app/build/reports/detekt'
   const files = getCheckstylesFiles([detektReportPath])
  
