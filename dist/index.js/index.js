@@ -9289,14 +9289,14 @@ const { parserXmlToObject } = __nccwpck_require__(5984)
  * @return {string}
  */
 function getDetektReport() {
-  console.log('iniciando aqui') 
+
   const detektReportPath = 'app/build/reports/detekt'
   const files = getCheckstylesFiles([detektReportPath])
  
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(detektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
-  return detektReport
+  return JSON.stringify(detektReport)
 }
 
 
@@ -9452,6 +9452,14 @@ module.exports = require("assert");
 
 /***/ }),
 
+/***/ 2081:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("child_process");
+
+/***/ }),
+
 /***/ 6113:
 /***/ ((module) => {
 
@@ -9598,17 +9606,34 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const { getDetektReport } = __nccwpck_require__(8262)
+const { spawn } = __nccwpck_require__(2081)
 const core = __nccwpck_require__(9943)
 
-const run = () => {
-  try {
 
-    core.info('\u001b[38;5;6m[info] 🏃‍♂️ Rodando linter')
-    report = getDetektReport()
-    core.setOutput('result > detekt', report)
-    core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
-    return outputBase64
+const run = () => {
+  const command = './gradlew detekt'
+  const childProcess = spawn(command, { shell: true })
+
+  try {
+    childProcess.stdout.on('data', (data) => {
+      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
+    })
+
+    childProcess.stderr.on('data', (data) => {
+      core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
+    })
+
+    childProcess.on('close', (code) => {
+      core.info('\u001b[38;5;6m[info] Iniciando analise do detekt')
+
+      report = getDetektReport()
+      core.setOutput('result > detekt', report)
+      core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
+      return report
+    })
+   
   } catch (error) {
+    core.setOutput('result > detekt', error)
     core.setFailed(`${error}`)
     return error
   }

@@ -6,14 +6,14 @@ const { parserXmlToObject } = require('../controller/xmlParser')
  * @return {string}
  */
 function getDetektReport() {
-  console.log('iniciando aqui') 
+
   const detektReportPath = 'app/build/reports/detekt'
   const files = getCheckstylesFiles([detektReportPath])
  
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(detektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
-  return detektReport
+  return JSON.stringify(detektReport)
 }
 
 
