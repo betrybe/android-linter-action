@@ -1,15 +1,12 @@
 # Detekt Linter Action
 
 A Github action that evaluates projects with [detekt](https://detekt.dev/)  and comments the evaluation
-🚧  👷‍♀️ Em construção  🚧  
 
 ## Development
 
-### Tools
-
 ### Build
 
-Para não ter que rodar o `npm install` na execução da action, usamos o [[ `vercel/ncc` ](https://github.com/vercel/ncc) para compilar o projeto em um único arquivo na pasta `dist` .
+Para não ter que rodar o `npm install` na execução da action, usamos o [ `vercel/ncc` ](https://github.com/vercel/ncc) para compilar o projeto em um único arquivo na pasta `dist` .
 
 ```bash
 ncc build index.js --license licenses.txt
@@ -21,24 +18,34 @@ ou
 ncc build index.js --out dist/index.js
 ```
 
-## Inputs 
-
-🚧  👷‍♀️ Em construção  🚧  
-
 ## Usage
 
-No projeto android adicionar ao build.grade o seguinte trecho
+No projeto android adicionar arquivo .github/workflows/main.yml
 
-```kotlin
-task detekt(type: Exec) {
-    commandLine "bash", "-c", "./gradlew detekt -i > detekt-report.txt"
-}
+```yml
+on:
+  pull_request:
 
-sudo ./gradlew detekt --continue
+    types: [opened, synchronize]
 
-sudo ./gradlew detekt --continue -r 'xml:reports/detekt.xml'
+jobs:
+  Tests:
+
+    runs-on: macos-latest
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Fetch Detekt Linter
+        uses: actions/checkout@v3
+
+        with:
+          repository: betrybe/detekt-linter-action
+          ref: v1
+          token: ${{ secrets.GIT_HUB_PAT }}
+          path: .github/actions/detekt-linter-action
+
+      - name: Run Detekt Linter
+        uses: ./.github/actions/detekt-linter-action
 ```
-
- sudo ./gradlew --i --report xml:reports/detekt.xml 
-
-🚧  👷‍♀️ Em construção  🚧  
