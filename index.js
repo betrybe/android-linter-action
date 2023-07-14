@@ -5,7 +5,7 @@ const core = require('@actions/core')
 
 const run = () => {
   // const command = './gradlew detekt'
-  const commandKtlint = '.gradlew ktlintCheck'
+  const commandKtlint = './gradlew ktlintCheck'
   const childProcess = spawn(commandKtlint, { shell: true })
 
   try {
