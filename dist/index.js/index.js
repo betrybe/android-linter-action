@@ -9612,7 +9612,7 @@ const core = __nccwpck_require__(9943)
 
 const run = () => {
   // const command = './gradlew detekt'
-  const commandKtlint = 'ktlint --reporter=checkstyle,output=ktlint-report-in-checkstyle-format.xml'
+  const commandKtlint = '.gradlew ktlintCheck'
   const childProcess = spawn(commandKtlint, { shell: true })
 
   try {
