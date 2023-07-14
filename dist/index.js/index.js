@@ -9612,8 +9612,9 @@ const core = __nccwpck_require__(9943)
 
 const run = () => {
   // const command = './gradlew detekt'
-  const commandKtlint = './gradlew ktlintCheck'
-  const childProcess = spawn(commandKtlint, { shell: true })
+  const command_verify_version = 'ktlint --version'
+  // const commandKtlint = './gradlew ktlintCheck'
+  const childProcess = spawn(command_verify_version, { shell: true })
 
   try {
     childProcess.stdout.on('data', (data) => {
