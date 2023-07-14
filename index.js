@@ -4,8 +4,9 @@ const core = require('@actions/core')
 
 
 const run = () => {
-  const command = './gradlew detekt'
-  const childProcess = spawn(command, { shell: true })
+  // const command = './gradlew detekt'
+  const commandKtlint = 'ktlint --reporter=checkstyle,output=ktlint-report-in-checkstyle-format.xml'
+  const childProcess = spawn(commandKtlint, { shell: true })
 
   try {
     childProcess.stdout.on('data', (data) => {
@@ -26,7 +27,7 @@ const run = () => {
     })
    
   } catch (error) {
-    core.setOutput('result > detekt', error)
+    core.setOutput('result > ktlint', error)
     core.setFailed(`${error}`)
     return error
   }
