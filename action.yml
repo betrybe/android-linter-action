@@ -17,10 +17,6 @@ runs:
         distribution: 'zulu'
         java-version: '11'
 
-    - name: Install ktlint
-      run: brew install ktlint
-      shell: bash
-
     - name: Gradle cache
       uses: gradle/gradle-build-action@v2
       
