@@ -36,10 +36,6 @@ function runKtlint() {
   const childProcess = spawn(command, { shell: true })
 
   try {
-    childProcess.stdout.on('data', (data) => {
-      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
-    })
-
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
     })

@@ -9582,7 +9582,14 @@ function getDetektReport() {
 const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
 
 function getKtlintReport() {
-  return searchJSONfiles(KTLINT_REPORT_PATH)
+  const files = searchJSONfiles(KTLINT_REPORT_PATH)
+
+  const ktlintReport = files
+    .map(file => loadFile(file))
+    .map(file => JSON.parse(file))
+    .flat()
+
+  return JSON.stringify(ktlintReport)
 }
 
 /**
@@ -17663,10 +17670,6 @@ function runKtlint() {
   const childProcess = spawn(command, { shell: true })
 
   try {
-    childProcess.stdout.on('data', (data) => {
-      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
-    })
-
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
     })
@@ -17675,6 +17678,7 @@ function runKtlint() {
       core.info('\u001b[38;5;6m[info] Iniciando análise do ktlint')
 
       report = getKtlintReport()
+      console.log('report', report)
       core.setOutput('result > ktlint', report)
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
       return report
