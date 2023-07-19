@@ -13034,7 +13034,7 @@ function runDetekt() {
     })
 
     childProcess.on('close', (code) => {
-      core.info('\u001b[38;5;6m[info] Iniciando analise do detekt')
+      core.info('\u001b[38;5;6m[info] Iniciando análise do detekt')
 
       report = getDetektReport()
       core.setOutput('result > detekt', report)
@@ -13050,7 +13050,7 @@ function runDetekt() {
 }
 
 function runKtlint() {
-  const command = './gradlew detekt'
+  const command = './gradlew ktlintCheck'
   const childProcess = spawn(command, { shell: true })
 
   try {
@@ -13063,9 +13063,9 @@ function runKtlint() {
     })
 
     childProcess.on('close', (code) => {
-      core.info('\u001b[38;5;6m[info] Iniciando analise do ktlint')
+      core.info('\u001b[38;5;6m[info] Iniciando análise do ktlint')
 
-      report = getDetektReport()
+      report = getKtlintReport()
       core.setOutput('result > ktlint', report)
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
       return report
