@@ -1,4 +1,4 @@
-const { searchFilesXml, loadFile } = require('../controller/fileManager')
+const { searchFilesXml, loadFile, searchJSONfiles } = require('../controller/fileManager')
 const { parserXmlToObject } = require('../controller/xmlParser')
 
 /**
@@ -16,6 +16,11 @@ function getDetektReport() {
   return JSON.stringify(detektReport)
 }
 
+const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
+
+function getKtlintReport(path) {
+  return searchJSONfiles(path)
+}
 
 /**
  * @example getCheckstylesFiles('./src/test/res/')
@@ -50,6 +55,7 @@ function buildCheckstyleObject(path, files) {
 
 module.exports = {
   getDetektReport,
+  getKtlintReport,
   getCheckstylesFiles,
   buildCheckstyleObject
 }

@@ -1,4 +1,4 @@
-const { getDetektReport } = require('./src/controller/detektManager')
+const { getDetektReport, getKtlintReport } = require('./src/controller/detektManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
 
@@ -47,7 +47,7 @@ function runKtlint() {
     childProcess.on('close', (code) => {
       core.info('\u001b[38;5;6m[info] Iniciando analise do ktlint')
 
-      report = 'success'
+      report = getDetektReport()
       core.setOutput('result > ktlint', report)
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
       return report
@@ -61,7 +61,7 @@ function runKtlint() {
 }
 
 const run = () => {
-  runDetekt()
+  // runDetekt()
   runKtlint()
 }
 

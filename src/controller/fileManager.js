@@ -2,6 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const core = require('@actions/core')
+const { globSync } = require("glob")
 
 /**
  * Retorna todos os arquivos xml's
@@ -25,6 +26,11 @@ function searchFilesXml(dirPath) {
   }
 }
 
+function searchJSONfiles(dirPath) {
+  const pattern = path.join(dirPath, '**/*.json')
+  return globSync(pattern)
+}
+
 /** 
  * Retorna a string gerada pela leitura do arquivo xml.
  * @param {string} pathFile 
@@ -44,5 +50,6 @@ function loadFile(pathFile) {
 
 module.exports = {
   loadFile,
-  searchFilesXml
+  searchFilesXml,
+  searchJSONfiles
 }
