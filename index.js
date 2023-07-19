@@ -2,8 +2,7 @@ const { getDetektReport } = require('./src/controller/detektManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
 
-
-const run = () => {
+function runDetekt() {
   const command = './gradlew detekt'
   const childProcess = spawn(command, { shell: true })
 
@@ -30,6 +29,10 @@ const run = () => {
     core.setFailed(`${error}`)
     return error
   }
+}
+
+const run = () => {
+  runDetekt()
 }
 
 core.info('\u001b[38;5;6m[info] 🏃‍♂️ Rodando linter')

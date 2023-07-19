@@ -9609,8 +9609,7 @@ const { getDetektReport } = __nccwpck_require__(3078)
 const { spawn } = __nccwpck_require__(2081)
 const core = __nccwpck_require__(4181)
 
-
-const run = () => {
+function runDetekt() {
   const command = './gradlew detekt'
   const childProcess = spawn(command, { shell: true })
 
@@ -9637,6 +9636,10 @@ const run = () => {
     core.setFailed(`${error}`)
     return error
   }
+}
+
+const run = () => {
+  runDetekt()
 }
 
 core.info('\u001b[38;5;6m[info] 🏃‍♂️ Rodando linter')
