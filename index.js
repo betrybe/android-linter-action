@@ -4,10 +4,8 @@ const core = require('@actions/core')
 
 
 const run = () => {
-  // const command = './gradlew detekt'
-  const command_verify_version = 'ktlint --version'
-  // const commandKtlint = './gradlew ktlintCheck'
-  const childProcess = spawn(command_verify_version, { shell: true })
+  const command = './gradlew detekt'
+  const childProcess = spawn(command, { shell: true })
 
   try {
     childProcess.stdout.on('data', (data) => {
@@ -28,7 +26,7 @@ const run = () => {
     })
    
   } catch (error) {
-    core.setOutput('result > ktlint', error)
+    core.setOutput('result > detect', error)
     core.setFailed(`${error}`)
     return error
   }
