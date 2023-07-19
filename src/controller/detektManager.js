@@ -18,8 +18,8 @@ function getDetektReport() {
 
 const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
 
-function getKtlintReport(path) {
-  return searchJSONfiles(path)
+function getKtlintReport() {
+  return searchJSONfiles(KTLINT_REPORT_PATH)
 }
 
 /**
