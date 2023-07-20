@@ -1,4 +1,4 @@
-const { getDetektReport, getKtlintReport } = require('./src/controller/detektManager')
+const { getDetektReport, getKtlintReport } = require('./src/controller/linterManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
 
