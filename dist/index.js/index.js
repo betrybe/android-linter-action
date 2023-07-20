@@ -17718,7 +17718,7 @@ function runKtlint() {
 }
 
 const run = () => {
-  // runDetekt()
+  runDetekt()
   runKtlint()
 }
 
