@@ -9586,7 +9586,7 @@ const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
  * @property {string} column - Coluna onde o erro foi encontrado.
  * @property {string} line - Linha onde o erro foi encontrado.
  * @property {string} message - Descrição do erro.
- * @property {string} rules - Nome da regra violada.
+ * @property {string} rule - Nome da regra violada.
  */
 
 /**
