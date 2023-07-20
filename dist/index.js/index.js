@@ -9581,6 +9581,25 @@ function getDetektReport() {
 
 const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
 
+/**
+ * @typedef {Object} KtlintError
+ * @property {string} column - Coluna onde o erro foi encontrado.
+ * @property {string} line - Linha onde o erro foi encontrado.
+ * @property {string} message - Descrição do erro.
+ * @property {string} rules - Nome da regra violada.
+ */
+
+/**
+ * @typedef {Object} KtlintReport
+ * @property {string} file - Nome do arquivo.
+ * @property {KtlintError[]} errors - Erros encontrados no arquivo.
+ */
+
+/**
+ * Retorna um relatório com os erros encontrados após a execução do Ktlint no projeto.
+ *
+ * @returns {KtlintReport[]} Relatório com os erros encontrados
+ */
 function getKtlintReport() {
   const files = searchJSONfiles(KTLINT_REPORT_PATH)
 
@@ -9663,6 +9682,13 @@ function searchFilesXml(dirPath) {
   }
 }
 
+/**
+ * Retorna todos os arquivos com extensão .json presente em um diretório.
+ * A busca é feita de forma recursiva, em todos us subdiretórios do diretório informado.
+ *
+ * @param {string} dirpath Diretório onde os arquivos serão buscados.
+ * @returns {string[]} Um array com o caminho de todos os arquivos JSON encontrados.
+ */
 function searchJSONfiles(dirPath) {
   const pattern = path.join(dirPath, '**/*.json')
   return globSync(pattern)
@@ -17678,7 +17704,6 @@ function runKtlint() {
       core.info('\u001b[38;5;6m[info] Iniciando análise do ktlint')
 
       report = getKtlintReport()
-      console.log('report', report)
       core.setOutput('result > ktlint', report)
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
       return report

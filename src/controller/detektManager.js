@@ -18,6 +18,25 @@ function getDetektReport() {
 
 const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
 
+/**
+ * @typedef {Object} KtlintError
+ * @property {string} column - Coluna onde o erro foi encontrado.
+ * @property {string} line - Linha onde o erro foi encontrado.
+ * @property {string} message - Descrição do erro.
+ * @property {string} rules - Nome da regra violada.
+ */
+
+/**
+ * @typedef {Object} KtlintReport
+ * @property {string} file - Nome do arquivo.
+ * @property {KtlintError[]} errors - Erros encontrados no arquivo.
+ */
+
+/**
+ * Retorna um relatório com os erros encontrados após a execução do Ktlint no projeto.
+ *
+ * @returns {KtlintReport[]} Relatório com os erros encontrados
+ */
 function getKtlintReport() {
   const files = searchJSONfiles(KTLINT_REPORT_PATH)
 

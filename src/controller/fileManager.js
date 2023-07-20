@@ -26,6 +26,13 @@ function searchFilesXml(dirPath) {
   }
 }
 
+/**
+ * Retorna todos os arquivos com extensão .json presente em um diretório.
+ * A busca é feita de forma recursiva, em todos us subdiretórios do diretório informado.
+ *
+ * @param {string} dirpath Diretório onde os arquivos serão buscados.
+ * @returns {string[]} Um array com o caminho de todos os arquivos JSON encontrados.
+ */
 function searchJSONfiles(dirPath) {
   const pattern = path.join(dirPath, '**/*.json')
   return globSync(pattern)
