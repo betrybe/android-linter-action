@@ -1,6 +1,6 @@
-# Detekt Linter Action
+# Android Linter Action
 
-A Github action that evaluates projects with [detekt](https://detekt.dev/)  and comments the evaluation
+A Github action that evaluates projects with [detekt](https://detekt.dev/) and comments the evaluation.
 
 ## Development
 
@@ -25,7 +25,6 @@ No projeto android adicionar arquivo .github/workflows/main.yml
 ```yml
 on:
   pull_request:
-
     types: [opened, synchronize]
 
 jobs:
@@ -37,15 +36,15 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: Fetch Detekt Linter
+      - name: Fetch Detekt/Ktlint Linter
         uses: actions/checkout@v3
 
         with:
-          repository: betrybe/detekt-linter-action
+          repository: betrybe/android-linter-action
           ref: v1
           token: ${{ secrets.GIT_HUB_PAT }}
-          path: .github/actions/detekt-linter-action
+          path: .github/actions/android-linter-action
 
-      - name: Run Detekt Linter
-        uses: ./.github/actions/detekt-linter-action
+      - name: Run Detekt/Ktlint Linter
+        uses: ./.github/actions/android-linter-action
 ```
