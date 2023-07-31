@@ -1,9 +1,8 @@
-const { getDetektReport } = require('./src/controller/detektManager')
+const { getDetektReport, getKtlintReport } = require('./src/controller/linterManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
 
-
-const run = () => {
+function runDetekt() {
   const command = './gradlew detekt'
   const childProcess = spawn(command, { shell: true })
 
@@ -17,7 +16,7 @@ const run = () => {
     })
 
     childProcess.on('close', (code) => {
-      core.info('\u001b[38;5;6m[info] Iniciando analise do detekt')
+      core.info('\u001b[38;5;6m[info] Iniciando análise do detekt')
 
       report = getDetektReport()
       core.setOutput('result > detekt', report)
@@ -26,10 +25,40 @@ const run = () => {
     })
    
   } catch (error) {
-    core.setOutput('result > detekt', error)
+    core.setOutput('result > detect', error)
     core.setFailed(`${error}`)
     return error
   }
+}
+
+function runKtlint() {
+  const command = './gradlew ktlintCheck'
+  const childProcess = spawn(command, { shell: true })
+
+  try {
+    childProcess.stderr.on('data', (data) => {
+      core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
+    })
+
+    childProcess.on('close', (code) => {
+      core.info('\u001b[38;5;6m[info] Iniciando análise do ktlint')
+
+      report = getKtlintReport()
+      core.setOutput('result > ktlint', report)
+      core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
+      return report
+    })
+
+  } catch (error) {
+    core.setOutput('result > detect', error)
+    core.setFailed(`${error}`)
+    return error
+  }
+}
+
+const run = () => {
+  runDetekt()
+  runKtlint()
 }
 
 core.info('\u001b[38;5;6m[info] 🏃‍♂️ Rodando linter')
