@@ -24,7 +24,7 @@ function runDetekt() {
       console.log(`Version: ${report[0].version}`)
       console.log('Verifique os erros abaixo:')
     
-      // console.table(report[0].file)
+      console.table(report[0].file)
       return report
     })
    
