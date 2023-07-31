@@ -1,6 +1,7 @@
 const { getDetektReport, getKtlintReport } = require('./src/controller/linterManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
+const { writeOutput } = require('./src/controller/writeOutput')
 
 function runDetekt() {
   const command = './gradlew detekt'
@@ -19,13 +20,14 @@ function runDetekt() {
       core.info('\u001b[38;5;6m[info] Iniciando análise do detekt')
 
       report = getDetektReport()
-      core.setOutput('result > detekt', report)
-      core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
+      core.setOutput('Detekt', report)
+      core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${report}`)
+      writeOutput(report)
       return report
     })
    
   } catch (error) {
-    core.setOutput('result > detect', error)
+    core.setOutput('Detekt', error)
     core.setFailed(`${error}`)
     return error
   }
@@ -50,7 +52,7 @@ function runKtlint() {
     })
 
   } catch (error) {
-    core.setOutput('result > detect', error)
+    core.setOutput('result > ktlint', error)
     core.setFailed(`${error}`)
     return error
   }
