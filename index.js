@@ -1,7 +1,6 @@
 const { getDetektReport, getKtlintReport } = require('./src/controller/linterManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
-const { writeOutput } = require('./src/controller/writeOutput')
 
 function runDetekt() {
   const command = './gradlew detekt'
@@ -22,7 +21,10 @@ function runDetekt() {
       report = getDetektReport()
       core.setOutput('Detekt', report)
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${report}`)
-      writeOutput(report)
+      console.log(`Version: ${report[0].version}`)
+      console.log('Verifique os erros abaixo:')
+    
+      console.table(files)
       return report
     })
    
