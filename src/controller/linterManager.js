@@ -13,7 +13,8 @@ function getDetektReport() {
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(detektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
-  return JSON.stringify(detektReport)
+  return detektReport
+  // return JSON.stringify(detektReport)
 }
 
 const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'

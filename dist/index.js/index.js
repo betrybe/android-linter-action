@@ -12763,7 +12763,8 @@ function getDetektReport() {
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(detektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
-  return JSON.stringify(detektReport)
+  return detektReport
+  // return JSON.stringify(detektReport)
 }
 
 const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
@@ -13071,12 +13072,12 @@ function runDetekt() {
       core.info('\u001b[38;5;6m[info] Iniciando análise do detekt')
 
       report = getDetektReport()
-      core.setOutput('Detekt', report)
-      core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${report}`)
+      core.setOutput('Detekt',  JSON.stringify(report))
+      core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${JSON.stringify(report)}`)
       console.log(`Version: ${report[0].version}`)
       console.log('Verifique os erros abaixo:')
     
-      console.table(files)
+      console.table(report[0].file)
       return report
     })
    
