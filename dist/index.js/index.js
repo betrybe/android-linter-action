@@ -12751,17 +12751,17 @@ module.exports = {
 const { searchFilesXml, loadFile, searchJSONfiles } = __nccwpck_require__(5224)
 const { parserXmlToObject } = __nccwpck_require__(5984)
 
+const DetektReportPath = 'app/build/reports/detekt'
 /**
  * @example getDetektReport()
  * @return {string}
  */
 function getDetektReport() {
 
-  const detektReportPath = 'app/build/reports/detekt'
-  const files = getCheckstylesFiles([detektReportPath])
+  const files = getCheckstylesFiles([DetektReportPath])
  
   const detektReport = files.map((file) => {
-    return buildCheckstyleObject(detektReportPath, file.files)
+    return buildCheckstyleObject(DetektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
   return detektReport
   // return JSON.stringify(detektReport)
@@ -13077,7 +13077,7 @@ function runDetekt() {
       console.log(`Version: ${report[0].version}`)
       console.log('Verifique os erros abaixo:')
     
-      console.table(report[0].file)
+      // console.table(report[0].file)
       return report
     })
    

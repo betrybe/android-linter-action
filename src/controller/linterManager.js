@@ -1,17 +1,17 @@
 const { searchFilesXml, loadFile, searchJSONfiles } = require('../controller/fileManager')
 const { parserXmlToObject } = require('../controller/xmlParser')
 
+const DetektReportPath = 'app/build/reports/detekt'
 /**
  * @example getDetektReport()
  * @return {string}
  */
 function getDetektReport() {
 
-  const detektReportPath = 'app/build/reports/detekt'
-  const files = getCheckstylesFiles([detektReportPath])
+  const files = getCheckstylesFiles([DetektReportPath])
  
   const detektReport = files.map((file) => {
-    return buildCheckstyleObject(detektReportPath, file.files)
+    return buildCheckstyleObject(DetektReportPath, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
   return detektReport
   // return JSON.stringify(detektReport)
