@@ -21,6 +21,16 @@ ncc build index.js --out dist/index.js
 
 ## Usage
 
+[Atencao] O projeto deve estar devidamente com configurações do detekt e ktlint.
+Para esta versão utilizamos as versões
+
+build.grade(app)
+
+```
+    id 'org.jlleitschuh.gradle.ktlint' version '11.5.0'
+    id 'io.gitlab.arturbosch.detekt' version '1.23.0'
+```
+
 No projeto android adicionar arquivo .github/workflows/main.yml
 
 ```yml
