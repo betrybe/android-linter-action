@@ -12840,6 +12840,39 @@ module.exports = {
 
 /***/ }),
 
+/***/ 7545:
+/***/ ((module) => {
+
+
+/**
+ * Formata saída de report via detekt
+ * @param {string} repotr
+ * @example writeOutput([{'version':'4.3','file':[{'name':'app/src/main/java/com/example/trybegenius/MainActivity.kt','error':[{'line':'89','column':'50','severity':'warning','message':'This expression contains a magic number. Consider defining it to a well named constant.','source':'detekt.MagicNumber'}]}])
+ * @output 
+    version: '4.3',
+    Verifique os erros abaixo:
+    `Formatado em tabela`
+  }
+ */
+
+function writeReport(report) {
+  console.log(`Version: ${report[0].version}`)
+  console.log('Verifique os erros abaixo:')
+  if(report.length > 0 && report[0].file.length > 0) {
+    report[0].file.forEach((element) => { 
+      console.log(`Arquivo: ${element.name}`)
+      console.table(element.error)
+    })
+  }
+}
+  
+module.exports = {
+  writeReport
+}
+
+
+/***/ }),
+
 /***/ 5984:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -13054,15 +13087,16 @@ var __webpack_exports__ = {};
 const { getDetektReport, getKtlintReport } = __nccwpck_require__(6109)
 const { spawn } = __nccwpck_require__(2081)
 const core = __nccwpck_require__(9943)
+const { writeReport } = __nccwpck_require__(7545)
 
 function runDetekt() {
   const command = './gradlew detekt'
   const childProcess = spawn(command, { shell: true })
 
   try {
-    childProcess.stdout.on('data', (data) => {
-      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
-    })
+    // childProcess.stdout.on('data', (data) => {
+    //   core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
+    // })
 
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
@@ -13074,14 +13108,8 @@ function runDetekt() {
       report = getDetektReport()
       core.setOutput('Detekt',  JSON.stringify(report))
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${JSON.stringify(report)}`)
-      console.log(`Version: ${report[0].version}`)
-      console.log('Verifique os erros abaixo:')
-      if(report.length > 0 && report[0].file.length > 0) {
-        report[0].file.forEach((element) => { 
-          console.log(`Arquivo: ${element.name}`)
-          console.table(element.error)
-        })
-      }
+
+      writeReport(report)
 
       return report
     })
@@ -13098,6 +13126,9 @@ function runKtlint() {
   const childProcess = spawn(command, { shell: true })
 
   try {
+    childProcess.stdout.on('data', (data) => {
+      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
+    })
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
     })

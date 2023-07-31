@@ -1,15 +1,16 @@
 const { getDetektReport, getKtlintReport } = require('./src/controller/linterManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
+const { writeReport } = require('./src/controller/writeOutput')
 
 function runDetekt() {
   const command = './gradlew detekt'
   const childProcess = spawn(command, { shell: true })
 
   try {
-    childProcess.stdout.on('data', (data) => {
-      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
-    })
+    // childProcess.stdout.on('data', (data) => {
+    //   core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
+    // })
 
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
@@ -21,14 +22,8 @@ function runDetekt() {
       report = getDetektReport()
       core.setOutput('Detekt',  JSON.stringify(report))
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${JSON.stringify(report)}`)
-      console.log(`Version: ${report[0].version}`)
-      console.log('Verifique os erros abaixo:')
-      if(report.length > 0 && report[0].file.length > 0) {
-        report[0].file.forEach((element) => { 
-          console.log(`Arquivo: ${element.name}`)
-          console.table(element.error)
-        })
-      }
+
+      writeReport(report)
 
       return report
     })
@@ -45,6 +40,9 @@ function runKtlint() {
   const childProcess = spawn(command, { shell: true })
 
   try {
+    childProcess.stdout.on('data', (data) => {
+      core.info(`\u001b[38;5;6m[info] Saída do comando: ${data}`)
+    })
     childProcess.stderr.on('data', (data) => {
       core.setFailed(`\u001b[38;5;6m[erro]  EXEC -> Erro no comando bash: ${data}`)
     })
