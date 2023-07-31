@@ -13076,8 +13076,13 @@ function runDetekt() {
       core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${JSON.stringify(report)}`)
       console.log(`Version: ${report[0].version}`)
       console.log('Verifique os erros abaixo:')
-    
-      console.table(report)
+      if(report.length > 0 && report[0].file.length > 0) {
+        report[0].file.forEach((element) => { 
+          console.log(`Arquivo: ${element.name}`)
+          console.table(element.error)
+        })
+      }
+
       return report
     })
    
