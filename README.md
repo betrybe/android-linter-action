@@ -1,6 +1,7 @@
 # Android Linter Action
 
-A Github action that evaluates projects with [detekt](https://detekt.dev/) and comments the evaluation.
+A Github action that evaluates projects with [detekt](https://detekt.dev/) and [ktlint](https://pinterest.github.io/ktlint/0.50.0/). 
+Generate feedback about analyzes.
 
 ## Development
 
