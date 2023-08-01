@@ -2,7 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const core = require('@actions/core')
-const { globSync } = require("glob")
+const { globSync } = require('glob')
 
 /**
  * Retorna todos os arquivos xml's
