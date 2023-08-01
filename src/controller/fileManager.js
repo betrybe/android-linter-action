@@ -45,11 +45,9 @@ function searchJSONfiles(dirPath) {
  * @output 
  */
 function loadFile(pathFile) {
-  core.info(`\u001b[38;5;6m[info] 🔍 Buscando arquivos xml -> ${pathFile}`)
   let xml_string
   try {
     xml_string = fs.readFileSync(pathFile, 'utf8')
-    core.info(`\u001b[38;5;6m[info] 📑 Arquivos encontrados para análise-> ${xml_string}`)
     return xml_string
   } catch (error) {
     throw new Error('Erro ao ler arquivo.')

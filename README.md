@@ -1,7 +1,6 @@
-# Android Linter Action
+# Android Linter Action  [![CI](https://github.com/betrybe/junit-android-evaluator-action/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/betrybe/android-linter-action/actions/workflows/main.yml)
 
-A Github action that evaluates projects with [detekt](https://detekt.dev/) and [ktlint](https://pinterest.github.io/ktlint/0.50.0/). 
-Generate feedback about analyzes.
+Projeto em javascript responsável por processar os relatórios(xml) de [detekt](https://detekt.dev/) e [ktlint](https://pinterest.github.io/ktlint/0.50.0/). 
 
 ## Development
 
@@ -19,7 +18,7 @@ ou
 ncc build index.js --out dist/index.js
 ```
 
-## Usage
+## Configurando seu projeto para utilizar o avaliador 
 
 [Atencao] O projeto deve estar devidamente com configurações do detekt e ktlint.
 Para esta versão utilizamos as versões

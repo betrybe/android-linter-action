@@ -1,3 +1,4 @@
+const core = require('@actions/core')
 const { searchFilesXml, loadFile, searchJSONfiles } = require('../controller/fileManager')
 const { parserXmlToObject } = require('../controller/xmlParser')
 
@@ -41,10 +42,14 @@ const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
 function getKtlintReport() {
   const files = searchJSONfiles(KTLINT_REPORT_PATH)
 
+  core.info(`\u001b[38;5;6m[info] 🔍 Buscando arquivos xml -> ${KTLINT_REPORT_PATH}`)
+
   const ktlintReport = files
     .map(file => loadFile(file))
     .map(file => JSON.parse(file))
     .flat()
+
+  core.info(`\u001b[38;5;6m[info] 📑 Arquivos encontrados para análise-> ${ktlintReport}`)
 
   return JSON.stringify(ktlintReport)
 }
