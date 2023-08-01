@@ -9634,14 +9634,14 @@ const core = __nccwpck_require__(299)
 const { searchFilesXml, loadFile, searchJSONfiles } = __nccwpck_require__(234)
 const { parserXmlToObject } = __nccwpck_require__(211)
 
-const DetektReportPath = 'app/build/reports/detekt'
+const DETEKT_REPORT_PATH = 'app/build/reports/detekt'
 /**
  * @example getDetektReport()
  * @return {string}
  */
 function getDetektReport() {
 
-  const files = getCheckstylesFiles([DetektReportPath])
+  const files = getCheckstylesFiles([DETEKT_REPORT_PATH])
  
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(DetektReportPath, file.files)
@@ -9650,7 +9650,9 @@ function getDetektReport() {
   // return JSON.stringify(detektReport)
 }
 
-const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
+// const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
+const KTLINT_REPORT_TEST_PATH = 'app/build/reports/ktlint/test/ktlintAndroidTestSourceSetCheck'
+const KTLINT_REPORT_PATH = 'app/build/reports/ktlint/test/ktlintAndroidTestSourceSetCheck'
 
 /**
  * @typedef {Object} KtlintError
@@ -9672,9 +9674,10 @@ const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
  * @returns {KtlintReport[]} Relatório com os erros encontrados
  */
 function getKtlintReport() {
-  const files = searchJSONfiles(KTLINT_REPORT_PATH)
+  const files = getCheckstylesFiles([KTLINT_REPORT_TEST_PATH. KTLINT_REPORT_PATH])
+  // const files = searchJSONfiles(KTLINT_REPORT_PATH)
 
-  core.info(`\u001b[38;5;6m[info] 🔍 Buscando arquivos xml -> ${KTLINT_REPORT_PATH}`)
+  core.info(`\u001b[38;5;6m[info] 🔍 Buscando arquivos em ${KTLINT_REPORT_PATH} na pasta  `)
 
   const ktlintReport = files
     .map(file => loadFile(file))
