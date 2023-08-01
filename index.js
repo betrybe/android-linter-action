@@ -16,8 +16,8 @@ function runDetekt() {
       core.info('\u001b[38;5;6m[info] Iniciando análise do detekt')
 
       report = getDetektReport()
-      core.setOutput('Detekt',  JSON.stringify(report))
-      core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${JSON.stringify(report)}`)
+      core.setOutput('Detekt', JSON.stringify(report))
+      core.notice('\u001b[32;5;6m 🚀 DETEKT > Processo concluído')
 
       writeReport(report)
 
@@ -45,7 +45,7 @@ function runKtlint() {
 
       report = getKtlintReport()
       core.setOutput('result > ktlint', report)
-      core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
+      core.notice(`\u001b[32;5;6m 🚀 KTLINT > Processo concluído ${report}`)
       return report
     })
 

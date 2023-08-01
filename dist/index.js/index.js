@@ -9608,11 +9608,9 @@ function searchJSONfiles(dirPath) {
  * @output 
  */
 function loadFile(pathFile) {
-  core.info(`\u001b[38;5;6m[info] 🔍 Buscando arquivos xml -> ${pathFile}`)
   let xml_string
   try {
     xml_string = fs.readFileSync(pathFile, 'utf8')
-    core.info(`\u001b[38;5;6m[info] 📑 Arquivos encontrados para análise-> ${xml_string}`)
     return xml_string
   } catch (error) {
     throw new Error('Erro ao ler arquivo.')
@@ -9632,6 +9630,7 @@ module.exports = {
 /***/ 696:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
+const core = __nccwpck_require__(299)
 const { searchFilesXml, loadFile, searchJSONfiles } = __nccwpck_require__(234)
 const { parserXmlToObject } = __nccwpck_require__(211)
 
@@ -9675,10 +9674,14 @@ const KTLINT_REPORT_PATH = 'app/build/reports/ktlint'
 function getKtlintReport() {
   const files = searchJSONfiles(KTLINT_REPORT_PATH)
 
+  core.info(`\u001b[38;5;6m[info] 🔍 Buscando arquivos xml -> ${KTLINT_REPORT_PATH}`)
+
   const ktlintReport = files
     .map(file => loadFile(file))
     .map(file => JSON.parse(file))
     .flat()
+
+  core.info(`\u001b[38;5;6m[info] 📑 Arquivos encontrados para análise-> ${ktlintReport}`)
 
   return JSON.stringify(ktlintReport)
 }
@@ -17713,8 +17716,8 @@ function runDetekt() {
       core.info('\u001b[38;5;6m[info] Iniciando análise do detekt')
 
       report = getDetektReport()
-      core.setOutput('Detekt',  JSON.stringify(report))
-      core.notice(`\u001b[32;5;6m 🚀 Processo concluído verifique abaixo os erros reportados ${JSON.stringify(report)}`)
+      core.setOutput('Detekt', JSON.stringify(report))
+      core.notice('\u001b[32;5;6m 🚀 DETEKT > Processo concluído')
 
       writeReport(report)
 
@@ -17742,7 +17745,7 @@ function runKtlint() {
 
       report = getKtlintReport()
       core.setOutput('result > ktlint', report)
-      core.notice(`\u001b[32;5;6m 🚀 Processo concluído -> ${report}`)
+      core.notice(`\u001b[32;5;6m 🚀 KTLINT > Processo concluído ${report}`)
       return report
     })
 
