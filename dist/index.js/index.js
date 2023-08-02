@@ -9644,7 +9644,7 @@ function getDetektReport() {
   const files = getCheckstylesFiles(DETEKT_REPORT_PATH)
  
   const detektReport = files.map((file) => {
-    return buildCheckstyleObject(DetektReportPath, file.files)
+    return buildCheckstyleObject(DETEKT_REPORT_PATH, file.files)
   }).reduce((acc, val) => acc.concat(val), [])
   return detektReport
   // return JSON.stringify(detektReport)
