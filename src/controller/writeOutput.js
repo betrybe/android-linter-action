@@ -13,7 +13,7 @@ const core = require('@actions/core')
 
 function writeReport(report) {
   console.log(`Version: ${report[0].version}`)
-  if(report[0]?.file.length() === 0) {
+  if(report[0]?.file && report[0]?.file.length === 0) {
     console.log('✅ APROVADO')
   }
   else {
