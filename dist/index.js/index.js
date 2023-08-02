@@ -9742,7 +9742,7 @@ module.exports = {
 
 function writeReport(report) {
   console.log(`Version: ${report[0].version}`)
-  if(report[0].file.length === 0) {
+  if(report[0]?.file.length === 0) {
     console.log('✅ APROVADO')
   }
   else {
@@ -9754,6 +9754,7 @@ function writeReport(report) {
         console.table(element.error)
       })
     }
+    // Trecho força quebra da action quando há erros reportados.
     throw new Error('Realize os ajustes necessário e tente novamente')
 
   }
