@@ -9742,12 +9742,20 @@ module.exports = {
 
 function writeReport(report) {
   console.log(`Version: ${report[0].version}`)
-  console.log('Verifique os erros abaixo:')
-  if(report.length > 0 && report[0].file.length > 0) {
-    report[0].file.forEach((element) => { 
-      core.setFailed(`\u001b[38;5;6m ❌ [erro] Arquivo: ${element.name}`)
-      console.table(element.error)
-    })
+  if(report[0].file.length === 0) {
+    console.log('✅ APROVADO')
+  }
+  else {
+    console.log('Verifique os erros abaixo:')
+    
+    if(report.length > 0 && report[0].file.length > 0) {
+      report[0].file.forEach((element) => { 
+        console.log(`❌ [erro] Arquivo: ${element.name}`)
+        console.table(element.error)
+      })
+    }
+    throw new Error('Realize os ajustes necessário e tente novamente')
+
   }
 }
   
