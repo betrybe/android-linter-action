@@ -9,7 +9,7 @@ const DETEKT_REPORT_PATH = 'app/build/reports/detekt'
  */
 function getDetektReport() {
 
-  const files = getCheckstylesFiles(DETEKT_REPORT_PATH)
+  const files = getCheckstylesFiles([DETEKT_REPORT_PATH])
  
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(DETEKT_REPORT_PATH, file.files)
@@ -53,7 +53,7 @@ function getKtlintReport() {
 }
 
 /**
- * @example getCheckstylesFiles('./src/test/res/')
+ * @example getCheckstylesFiles(['./src/test/res/'])
  * @param {array} pathList - caminho da pasta para o xml's.
  * @return {string}
  */
