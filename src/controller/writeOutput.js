@@ -15,7 +15,7 @@ function writeReport(report) {
   console.log('Verifique os erros abaixo:')
   if(report.length > 0 && report[0].file.length > 0) {
     report[0].file.forEach((element) => { 
-      console.log(`Arquivo: ${element.name}`)
+      core.setFailed(`\u001b[38;5;6m ❌ [erro] Arquivo: ${element.name}`)
       console.table(element.error)
     })
   }
