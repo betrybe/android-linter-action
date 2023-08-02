@@ -1,3 +1,4 @@
+const core = require('@actions/core')
 
 /**
  * Formata saída de report via detekt
@@ -12,7 +13,7 @@
 
 function writeReport(report) {
   console.log(`Version: ${report[0].version}`)
-  if(report[0]?.file.length === 0) {
+  if(report[0]?.file.length() === 0) {
     console.log('✅ APROVADO')
   }
   else {
@@ -25,7 +26,7 @@ function writeReport(report) {
       })
     }
     // Trecho força quebra da action quando há erros reportados.
-    throw new Error('Realize os ajustes necessário e tente novamente')
+    core.setFailed('❌ Erros encontrados')
 
   }
 }
