@@ -9742,6 +9742,7 @@ module.exports = {
 
 function writeReport(report) {
   console.log(`Version: ${report[0].version}`)
+<<<<<<< HEAD
   if(report[0].file.length === 0) {
     console.log('✅ APROVADO')
   }
@@ -9756,6 +9757,14 @@ function writeReport(report) {
     }
     throw new Error('Realize os ajustes necessário e tente novamente')
 
+=======
+  console.log('Verifique os erros abaixo:')
+  if(report.length > 0 && report[0].file.length > 0) {
+    report[0].file.forEach((element) => { 
+      core.setFailed(`\u001b[38;5;6m ❌ [erro] Arquivo: ${element.name}`)
+      console.table(element.error)
+    })
+>>>>>>> origin/v1
   }
 }
   
