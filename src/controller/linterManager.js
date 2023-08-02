@@ -9,7 +9,7 @@ const DETEKT_REPORT_PATH = 'app/build/reports/detekt'
  */
 function getDetektReport() {
 
-  const files = getCheckstylesFiles([DETEKT_REPORT_PATH])
+  const files = getCheckstylesFiles(DETEKT_REPORT_PATH)
  
   const detektReport = files.map((file) => {
     return buildCheckstyleObject(DetektReportPath, file.files)
