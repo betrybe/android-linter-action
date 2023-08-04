@@ -49,8 +49,6 @@ function writeReportKtlint(report) {
   }
   else {
     console.log('Verifique os erros abaixo:')
-    console.log(typeof(report))
-
     var output = JSON.parse(report)
 
     output.forEach((element) => { 
