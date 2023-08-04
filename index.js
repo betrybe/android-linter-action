@@ -1,7 +1,7 @@
 const { getDetektReport, getKtlintReport } = require('./src/controller/linterManager')
 const { spawn } = require('child_process')
 const core = require('@actions/core')
-const { writeReport } = require('./src/controller/writeOutput')
+const { writeReportDetekt, writeReportKtlint } = require('./src/controller/writeOutput')
 
 function runDetekt() {
   const command = './gradlew detekt'
@@ -19,7 +19,7 @@ function runDetekt() {
       core.setOutput('Detekt', JSON.stringify(report))
       core.notice('\u001b[32;5;6m 🚀 DETEKT > Processo concluído')
 
-      writeReport(report)
+      writeReportDetekt(report)
 
       return report
     })
@@ -45,7 +45,8 @@ function runKtlint() {
 
       report = getKtlintReport()
       core.setOutput('result > ktlint', report)
-      core.notice(`\u001b[32;5;6m 🚀 KTLINT > Processo concluído ${report}`)
+      core.notice('\u001b[32;5;6m 🚀 KTLINT > Processo concluído')
+      writeReportKtlint(report)
       return report
     })
 
