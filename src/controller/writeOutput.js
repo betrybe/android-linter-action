@@ -49,7 +49,14 @@ function writeReportKtlint(report) {
   }
   else {
     console.log('Verifique os erros abaixo:')
-    console.log(report)
+    console.log(typeof(report))
+
+    var output = JSON.parse(report)
+
+    output.forEach((element) => { 
+      console.log(`❌ [erro] Arquivo: ${element.file}`)
+      console.table(element.errors)
+    })
     
     if(report.length > 0 && report[0].length > 0) {
       report.forEach((element) => { 
