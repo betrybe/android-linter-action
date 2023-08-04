@@ -53,7 +53,7 @@ function writeReportKtlint(report) {
     console.log('Verifique os erros abaixo:')
     
     if(report.length > 0 && report[0].length > 0) {
-      report[0].file.forEach((element) => { 
+      report.forEach((element) => { 
         console.log(`❌ [erro] Arquivo: ${element.file}`)
         console.table(element.errors)
       })
