@@ -58,12 +58,6 @@ function writeReportKtlint(report) {
       console.table(element.errors)
     })
     
-    if(report.length > 0 && report[0].length > 0) {
-      report.forEach((element) => { 
-        console.log(`❌ [erro] Arquivo: ${element.file}`)
-        console.table(element.errors)
-      })
-    }
     // Trecho força quebra da action quando há erros reportados.
     core.setFailed('❌ Erros encontrados')
   }
