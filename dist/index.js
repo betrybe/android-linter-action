@@ -9776,7 +9776,7 @@ function writeReportDetekt(report) {
 
 function writeReportKtlint(report) {
   console.log(`Version: ${report[0].version}`)
-  if(report.length() === 0) {
+  if(report.length === 0) {
     console.log('✅ APROVADO')
   }
   else {
