@@ -9774,15 +9774,13 @@ function writeReportDetekt(report) {
 
 
 function writeReportKtlint(report) {
-  if(report.length === 0) {
+  var output = JSON.parse(report)
+  console.log(output)
+  if(output.length === 0) {
     console.log('✅ APROVADO')
   }
   else {
     console.log('Verifique os erros abaixo:')
-    console.log(typeof(report))
-
-    var output = JSON.parse(report)
-
     output.forEach((element) => { 
       console.log(`❌ [erro] Arquivo: ${element.file}`)
       console.table(element.errors)
