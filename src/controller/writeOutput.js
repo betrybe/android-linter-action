@@ -45,7 +45,6 @@ function writeReportDetekt(report) {
 
 function writeReportKtlint(report) {
   var output = JSON.parse(report)
-  console.log(output)
   if(output.length === 0) {
     console.log('✅ APROVADO')
   }
