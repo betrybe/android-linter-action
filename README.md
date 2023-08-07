@@ -40,7 +40,7 @@ on:
 jobs:
   Tests:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
 
       - name: checkout
